@@ -6,6 +6,8 @@
 
 #include <glib.h>
 #include <glib-object.h>
+#include <stdlib.h>
+#include <string.h>
 
 G_BEGIN_DECLS
 
@@ -22,26 +24,19 @@ typedef struct _SystemStringClass SystemStringClass;
 typedef struct _SystemStringPrivate SystemStringPrivate;
 
 struct _SystemString {
-	GTypeInstance parent_instance;
-	volatile int ref_count;
+	GObject parent_instance;
 	SystemStringPrivate * priv;
 };
 
 struct _SystemStringClass {
-	GTypeClass parent_class;
-	void (*finalize) (SystemString *self);
+	GObjectClass parent_class;
 };
 
 
-gpointer system_string_ref (gpointer instance);
-void system_string_unref (gpointer instance);
-GParamSpec* system_param_spec_string (const gchar* name, const gchar* nick, const gchar* blurb, GType object_type, GParamFlags flags);
-void system_value_set_string (GValue* value, gpointer v_object);
-void system_value_take_string (GValue* value, gpointer v_object);
-gpointer system_value_get_string (const GValue* value);
 GType system_string_get_type (void) G_GNUC_CONST;
 SystemString* system_string_new (void);
 SystemString* system_string_construct (GType object_type);
+gboolean system_string_EndsWith (SystemString* self, const gchar* string);
 
 
 G_END_DECLS

@@ -1,2 +1,2 @@
 #!/bin/bash
-valac -C -H String.h --library String String.vala
+valac --library=String -H String.h String.vala -X -fPIC -X -shared -o String.so
